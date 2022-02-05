@@ -332,7 +332,7 @@ class LoginPopupSelf extends Component {
                   ref={this.ref.username}
                   type="email"
                   autoFocus={true}
-                  defaultValue="@mails.tsinghua.edu.cn"
+                  placeholder="CMU Email Only"
                   onKeyDown={(event) => {
                     if (event.key === 'Enter') {
                       this.next_step();

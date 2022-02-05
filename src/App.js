@@ -9,6 +9,7 @@ import { load_config, bgimg_style } from './Config';
 import { listen_darkmode } from './old_infrastructure/functions';
 import { TitleLine } from './old_infrastructure/widgets';
 import { LoginPopup } from './login';
+import { LoginAltPopup } from './login_alt';
 import { cache } from './cache';
 import './App.css';
 
@@ -146,10 +147,26 @@ class App extends Component {
                         {(do_popup) => (
                           <a onClick={do_popup}>
                             <span className="icon icon-login" />
-                            &nbsp;登录到 {process.env.REACT_APP_TITLE}
+                            &nbsp;(Email) Log In / Sign Up
                           </a>
                         )}
                       </LoginPopup>
+                    </p>
+                  </div>
+                </div>
+              )}
+              {!token.value && (
+                <div className="flow-item-row aux-margin">
+                  <div className="box box-tip">
+                    <p>
+                      <LoginAltPopup token_callback={token.set_value}>
+                        {(do_popup) => (
+                          <a onClick={do_popup}>
+                            <span className="icon icon-login" />
+                            &nbsp;(Anonymous) Log In / Sign Up
+                          </a>
+                        )}
+                      </LoginAltPopup>
                     </p>
                   </div>
                 </div>

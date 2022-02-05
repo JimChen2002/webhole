@@ -22,7 +22,7 @@ class LoginAltPopupSelf extends Component {
     this.state = {
       loading_status: 'idle',
       recaptcha_verified: false,
-      phase: 2,
+      phase: 0,
       // excluded_scopes: [],
     };
 
@@ -318,41 +318,24 @@ class LoginAltPopupSelf extends Component {
         <div>
           <div className="treehollow-login-popup-shadow" />
           <div className="treehollow-login-popup margin-popup">
-            {this.state.phase === -1 && (
-              <>
-                <p>
-                  <b>输入邮箱来登录 {process.env.REACT_APP_TITLE}</b>
-                </p>
-              </>
-            )}
-            <p style={this.state.phase === -1 ? {} : { display: 'none' }}>
-              <label>
-                邮箱&nbsp;
-                <input
-                  ref={this.ref.username}
-                  type="email"
-                  autoFocus={true}
-                  placeholder="CMU Email Only"
-                  onKeyDown={(event) => {
-                    if (event.key === 'Enter') {
-                      this.next_step();
-                    }
-                  }}
-                />
-              </label>
-            </p>
             {this.state.phase === 0 && (
               <>
                 <p>
-                  <b>输入密码来登录 {process.env.REACT_APP_TITLE}</b>
+                  <label>
+                    Username:&nbsp;
+                    <input
+                      ref={this.ref.username}
+                      type="text"
+                      autoFocus={true}
+                    />
+                  </label>
                 </p>
                 <p>
                   <label>
-                    密码&nbsp;
+                    Password:&nbsp;
                     <input
                       ref={this.ref.password}
                       type="password"
-                      autoFocus={true}
                       onKeyDown={(event) => {
                         if (event.key === 'Enter') {
                           this.next_step();
@@ -365,11 +348,11 @@ class LoginAltPopupSelf extends Component {
                   <a
                     onClick={() => {
                       alert(
-                        '在树洞网页版的“账户”界面，可以注销账号之后重新注册树洞。',
+                        'You can delete your account in the sidebar',
                       );
                     }}
                   >
-                    忘记密码？
+                    Forget your password?
                   </a>
                 </p>
               </>

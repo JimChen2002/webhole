@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
 import './login.css';
+import './login_alt.css';
 
 import { API_ROOT } from './old_infrastructure/const';
 import { API_VERSION_PARAM, get_json } from './old_infrastructure/functions';
@@ -28,6 +29,7 @@ class LoginAltPopupSelf extends Component {
 
     this.ref = {
       username: React.createRef(),
+      andrew_email: React.createRef(),
       email_verification: React.createRef(),
       password: React.createRef(),
       password_confirm: React.createRef(),
@@ -47,17 +49,14 @@ class LoginAltPopupSelf extends Component {
   next_step() {
     if (this.state.loading_status === 'loading') return;
     switch (this.state.phase) {
-      case -1:
-        this.verify_email('v3', () => {});
-        break;
       case 0:
         this.do_login(this.props.token_callback);
         break;
       case 1:
-        this.new_user_registration(this.props.token_callback);
+        this.verify_email('v3', () => {});
         break;
       case 2:
-        this.old_user_registration(this.props.token_callback);
+        this.new_user_registration(this.props.token_callback);
         break;
       case 3:
         this.need_recaptcha();
@@ -67,21 +66,20 @@ class LoginAltPopupSelf extends Component {
 
   valid_registration() {
     if (
-      !this.ref.checkbox_terms.current.checked ||
       !this.ref.checkbox_account.current.checked
     ) {
-      alert('请同意条款与条件！');
+      alert('Please check to indicate your acknowledgement');
       return 1;
     }
     if (this.ref.password.current.value.length < 8) {
-      alert('密码太短，至少应包含8个字符！');
+      alert('Password too short, should have length at least 8');
       return 2;
     }
     if (
       this.ref.password.current.value !==
       this.ref.password_confirm.current.value
     ) {
-      alert('密码不一致！');
+      alert('Passwords are not the same');
       return 3;
     }
     return 0;
@@ -109,7 +107,7 @@ class LoginAltPopupSelf extends Component {
 
   verify_email(version, failed_callback) {
     const old_token = new URL(location.href).searchParams.get('old_token');
-    const email = this.ref.username.current.value;
+    const email = this.ref.andrew_email.current.value;
     const recaptcha_version = version;
     const recaptcha_token = localStorage['recaptcha'];
     // VALIDATE EMAIL IN FRONT-END HERE
@@ -125,7 +123,7 @@ class LoginAltPopupSelf extends Component {
         loading_status: 'loading',
       },
       () => {
-        fetch(API_ROOT + 'security/login/check_email?' + API_VERSION_PARAM(), {
+        fetch(API_ROOT + 'security/login/check_email_invitation?' + API_VERSION_PARAM(), {
           method: 'POST',
           body,
         })
@@ -141,7 +139,7 @@ class LoginAltPopupSelf extends Component {
             if (json.code === 3) failed_callback();
           })
           .catch((e) => {
-            alert('邮箱检验失败\n' + e);
+            alert('Fail to validate your email\n' + e);
             this.setState({
               loading_status: 'done',
             });
@@ -181,7 +179,7 @@ class LoginAltPopupSelf extends Component {
             }
 
             set_token(json.token);
-            alert('登录成功');
+            alert('Login Successfully!');
             this.setState({
               loading_status: 'done',
             });
@@ -189,7 +187,7 @@ class LoginAltPopupSelf extends Component {
           })
           .catch((e) => {
             console.error(e);
-            alert('登录失败\n' + e);
+            alert('Login Failed\n' + e);
             this.setState({
               loading_status: 'done',
             });
@@ -219,7 +217,7 @@ class LoginAltPopupSelf extends Component {
       },
       () => {
         fetch(
-          API_ROOT + 'security/login/create_account?' + API_VERSION_PARAM(),
+          API_ROOT + 'security/login/create_account_invitation?' + API_VERSION_PARAM(),
           {
             method: 'POST',
             body,
@@ -233,7 +231,7 @@ class LoginAltPopupSelf extends Component {
             }
 
             set_token(json.token);
-            alert('登录成功');
+            alert('Login Successfully!');
             this.setState({
               loading_status: 'done',
             });
@@ -241,59 +239,7 @@ class LoginAltPopupSelf extends Component {
           })
           .catch((e) => {
             console.error(e);
-            alert('登录失败\n' + e);
-            this.setState({
-              loading_status: 'done',
-            });
-          });
-      },
-    );
-  }
-
-  async old_user_registration(set_token) {
-    if (this.valid_registration() !== 0) return;
-    const email = this.ref.username.current.value;
-    const old_token = new URL(location.href).searchParams.get('old_token');
-    const password = this.ref.password.current.value;
-    let password_hashed = await this.hashpassword(password);
-    const device_info = UAParser(navigator.userAgent).browser.name;
-    const body = new URLSearchParams();
-    Object.entries({
-      email,
-      password_hashed,
-      device_type: 0,
-      device_info,
-      old_token,
-    }).forEach((param) => body.append(...param));
-    this.setState(
-      {
-        loading_status: 'loading',
-      },
-      () => {
-        fetch(
-          API_ROOT + 'security/login/create_account?' + API_VERSION_PARAM(),
-          {
-            method: 'POST',
-            body,
-          },
-        )
-          .then(get_json)
-          .then((json) => {
-            if (json.code !== 0) {
-              if (json.msg) throw new Error(json.msg);
-              throw new Error(JSON.stringify(json));
-            }
-
-            set_token(json.token);
-            alert('登录成功');
-            this.setState({
-              loading_status: 'done',
-            });
-            this.props.on_close();
-          })
-          .catch((e) => {
-            console.error(e);
-            alert('登录失败\n' + e);
+            alert('Login Failed\n' + e);
             this.setState({
               loading_status: 'done',
             });
@@ -355,43 +301,101 @@ class LoginAltPopupSelf extends Component {
                     Forget your password?
                   </a>
                 </p>
+                <p>
+                  <button
+                    onClick={()=>{
+                      this.setState({
+                        phase: 1,
+                      })
+                    }}
+                  >
+                    <b>Sign up</b>
+                  </button>
+                </p>
               </>
             )}
             {this.state.phase === 1 && (
               <>
                 <p>
-                  <b>{process.env.REACT_APP_TITLE} 新用户注册</b>
+                  <b>Procedures:</b>
+                </p>
+                <p>
+                  You will request an invitation code with your 
+                  CMU email, and use it to sign up an anonymous account.
+                </p>
+                <p>
+                  <b>Difference between invitation code and verification code:</b>
+                </p>
+                <p>
+                  Invitation code is the same for everyone, so when signing up with 
+                  it, you reveals nothing more than the fact that you have access 
+                  to a CMU email.
+                </p>
+                <p>
+                  <b>Best practice:</b>
+                </p>
+                <p>
+                  1. After getting the code, you can wait some time.
+                </p>
+                <p>
+                  2. You can get the code with a device, and then sign up with 
+                  another device. We are compatible for both phone and computer.
+                </p>
+                <p>*Press continue if you have one*</p>
+                <p>
+                  <label>
+                    Email&nbsp;
+                    <input
+                      ref={this.ref.andrew_email}
+                      type="email"
+                      autoFocus={true}
+                    />
+                  </label>
+                  <p>
+                    <button
+                      onClick={()=>{
+                        this.next_step()
+                      }}
+                    >
+                      <b>Send code</b>
+                    </button>
+                  </p>
+                </p>
+              </>
+            )}
+            {(this.state.phase === 2) && (
+              <>
+                <p>
+                  <b>Sign up</b>
                 </p>
                 <p>
                   <label>
-                    邮箱验证码&nbsp;
+                    Username&nbsp;
                     <input
-                      ref={this.ref.email_verification}
-                      type="tel"
+                      ref={this.ref.username}
+                      type="text"
                       autoFocus={true}
                     />
                   </label>
                 </p>
-              </>
-            )}
-            {this.state.phase === 2 && (
-              <>
-                <p>
-                  <b>{process.env.REACT_APP_TITLE} 老用户注册</b>
-                </p>
-              </>
-            )}
-            {(this.state.phase === 1 || this.state.phase === 2) && (
-              <>
                 <p>
                   <label>
-                    密码&nbsp;
+                    Invitation code&nbsp;
+                    <input
+                      ref={this.ref.email_verification}
+                      type="text"
+                    />
+                  </label>
+                </p>
+                <p>
+                  <label>
+                    Password&nbsp;
                     <input ref={this.ref.password} type="password" />
                   </label>
                 </p>
                 <p>
                   <label>
-                    密码确认&nbsp;
+                    Password&nbsp;
                     <input
                       ref={this.ref.password_confirm}
                       type="password"
@@ -405,17 +409,8 @@ class LoginAltPopupSelf extends Component {
                 </p>
                 <p>
                   <label>
-                    <input type="checkbox" ref={this.ref.checkbox_terms} />
-                    我已经阅读并同意了
-                    <a href={process.env.REACT_APP_TOS_URL}>服务协议</a>、
-                    <a href={process.env.REACT_APP_PRIVACY_URL}>隐私政策</a>和
-                    <a href={process.env.REACT_APP_RULES_URL}>社区规范</a>。
-                  </label>
-                </p>
-                <p>
-                  <label>
                     <input type="checkbox" ref={this.ref.checkbox_account} />
-                    我已经了解了用户的个人信息会通过设定的密码加密，如果忘记密码会很难找回账户。
+                    I understand that I will not be able to get my account back if I forget my password.
                   </label>
                 </p>
               </>
@@ -423,7 +418,7 @@ class LoginAltPopupSelf extends Component {
             {this.state.phase === 3 && (
               <>
                 <p>
-                  <b>输入验证码 {process.env.REACT_APP_TITLE}</b>
+                  <b>Enter the invitation code {process.env.REACT_APP_TITLE}</b>
                 </p>
                 <RecaptchaV2Popup
                   callback={() => {
@@ -452,13 +447,13 @@ class LoginAltPopupSelf extends Component {
               </>
             )}
             <p>
+              <button onClick={this.props.on_close}>Cancel</button>
               <button
                 onClick={this.next_step.bind(this)}
                 disabled={this.state.loading_status === 'loading'}
               >
-                下一步
+                Continue
               </button>
-              <button onClick={this.props.on_close}>取消</button>
             </p>
           </div>
         </div>

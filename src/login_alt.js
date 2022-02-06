@@ -342,27 +342,24 @@ class LoginAltPopupSelf extends Component {
                   another device. We are compatible for both phone and computer.
                 </p>
                 <p>*Press continue if you have one*</p>
-                <p>
-                  <label>
-                    Email&nbsp;
-                    <input
-                      ref={this.ref.andrew_email}
-                      type="email"
-                      autoFocus={true}
-                    />
-                  </label>
-                  <p>
-                    <button
-                      onClick={()=>{
-                        this.next_step()
-                      }}
-                    >
-                      <b>Send code</b>
-                    </button>
-                  </p>
-                </p>
               </>
-            )}
+            )}  
+            <p style={this.state.phase === 1 ? {} : { display: 'none' }}>
+              <label>
+                Email&nbsp;
+                <input
+                  ref={this.ref.andrew_email}
+                  type="email"
+                  autoFocus={true}
+                  placeholder="CMU Email Only"
+                  onKeyDown={(event) => {
+                    if (event.key === 'Enter') {
+                      this.next_step();
+                    }
+                  }}
+                />
+              </label>
+            </p>
             {(this.state.phase === 2) && (
               <>
                 <p>
@@ -418,7 +415,7 @@ class LoginAltPopupSelf extends Component {
             {this.state.phase === 3 && (
               <>
                 <p>
-                  <b>Enter the invitation code {process.env.REACT_APP_TITLE}</b>
+                  <b>输入验证码 {process.env.REACT_APP_TITLE}</b>
                 </p>
                 <RecaptchaV2Popup
                   callback={() => {
@@ -559,7 +556,7 @@ export class RecaptchaV2Popup extends Component {
               </div>
 
               <p>
-                <button onClick={this.on_close_bound}>取消</button>
+                <button onClick={this.on_close_bound}>Cancel</button>
               </p>
             </div>
           </div>

@@ -318,16 +318,9 @@ class LoginPopupSelf extends Component {
         <div>
           <div className="treehollow-login-popup-shadow" />
           <div className="treehollow-login-popup margin-popup">
-            {this.state.phase === -1 && (
-              <>
-                <p>
-                  <b>输入邮箱来登录 {process.env.REACT_APP_TITLE}</b>
-                </p>
-              </>
-            )}
             <p style={this.state.phase === -1 ? {} : { display: 'none' }}>
               <label>
-                邮箱&nbsp;
+                Email:&nbsp;
                 <input
                   ref={this.ref.username}
                   type="email"
@@ -344,11 +337,8 @@ class LoginPopupSelf extends Component {
             {this.state.phase === 0 && (
               <>
                 <p>
-                  <b>输入密码来登录 {process.env.REACT_APP_TITLE}</b>
-                </p>
-                <p>
                   <label>
-                    密码&nbsp;
+                    Password:&nbsp;
                     <input
                       ref={this.ref.password}
                       type="password"
@@ -365,11 +355,11 @@ class LoginPopupSelf extends Component {
                   <a
                     onClick={() => {
                       alert(
-                        '在树洞网页版的“账户”界面，可以注销账号之后重新注册树洞。',
+                        'You can delete and sign up again in the sidebar.',
                       );
                     }}
                   >
-                    忘记密码？
+                    Forget your password?
                   </a>
                 </p>
               </>
@@ -377,11 +367,11 @@ class LoginPopupSelf extends Component {
             {this.state.phase === 1 && (
               <>
                 <p>
-                  <b>{process.env.REACT_APP_TITLE} 新用户注册</b>
+                  <b>New user sign up</b>
                 </p>
                 <p>
                   <label>
-                    邮箱验证码&nbsp;
+                    Verification code:&nbsp;
                     <input
                       ref={this.ref.email_verification}
                       type="tel"
@@ -394,7 +384,7 @@ class LoginPopupSelf extends Component {
             {this.state.phase === 2 && (
               <>
                 <p>
-                  <b>{process.env.REACT_APP_TITLE} 老用户注册</b>
+                  <b>Old user sign up</b>
                 </p>
               </>
             )}
@@ -402,13 +392,13 @@ class LoginPopupSelf extends Component {
               <>
                 <p>
                   <label>
-                    密码&nbsp;
+                    Password:&nbsp;
                     <input ref={this.ref.password} type="password" />
                   </label>
                 </p>
                 <p>
                   <label>
-                    密码确认&nbsp;
+                    Enter password again:&nbsp;
                     <input
                       ref={this.ref.password_confirm}
                       type="password"
@@ -420,32 +410,17 @@ class LoginPopupSelf extends Component {
                     />
                   </label>
                 </p>
-                <p>
-                  <label>
-                    <input type="checkbox" ref={this.ref.checkbox_terms} />
-                    我已经阅读并同意了
-                    <a href={process.env.REACT_APP_TOS_URL}>服务协议</a>、
-                    <a href={process.env.REACT_APP_PRIVACY_URL}>隐私政策</a>和
-                    <a href={process.env.REACT_APP_RULES_URL}>社区规范</a>。
-                  </label>
-                </p>
-                <p>
-                  <label>
-                    <input type="checkbox" ref={this.ref.checkbox_account} />
-                    我已经了解了用户的个人信息会通过设定的密码加密，如果忘记密码会很难找回账户。
-                  </label>
-                </p>
               </>
             )}
             {this.state.phase === 3 && (
               <>
                 <p>
-                  <b>输入验证码 {process.env.REACT_APP_TITLE}</b>
+                  <b>Enter verification code:</b>
                 </p>
                 <RecaptchaV2Popup
                   callback={() => {
                     this.verify_email('v2', () => {
-                      alert('reCAPTCHA风控系统校验失败');
+                      alert('reCAPTCHA failed');
                     });
                   }}
                 >
@@ -473,9 +448,9 @@ class LoginPopupSelf extends Component {
                 onClick={this.next_step.bind(this)}
                 disabled={this.state.loading_status === 'loading'}
               >
-                下一步
+                Confirm
               </button>
-              <button onClick={this.props.on_close}>取消</button>
+              <button onClick={this.props.on_close}>Cancel</button>
             </p>
           </div>
         </div>

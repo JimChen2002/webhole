@@ -4,8 +4,8 @@ import './Config.css';
 import { HighlightedMarkdown } from './Common';
 
 const BUILTIN_IMGS = {
-  'https://cdn.jsdelivr.net/gh/thuhole/webhole@gh-pages/static/bg/gbp.jpg':
-    '寻觅繁星（默认）',
+  'https://i.cmuhole.com/CMU_Dream.jpg':
+    'CMU Dream',
   'https://cdn.jsdelivr.net/gh/thuhole/webhole@gh-pages/static/bg/eriri.jpg':
     '平成著名画师',
   'https://cdn.jsdelivr.net/gh/thuhole/webhole@gh-pages/static/bg/yurucamp.jpg':
@@ -21,8 +21,7 @@ const BUILTIN_IMGS = {
 };
 
 const DEFAULT_CONFIG = {
-  background_img:
-    'https://cdn.jsdelivr.net/gh/thuhole/webhole@gh-pages/static/bg/gbp.jpg',
+  background_img: 'https://i.cmuhole.com/CMU_Dream.jpg',
   background_color: '#113366',
   pressure: false,
   easter_egg: true,

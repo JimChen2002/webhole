@@ -415,7 +415,7 @@ class LoginAltPopupSelf extends Component {
             {this.state.phase === 3 && (
               <>
                 <p>
-                  <b>输入验证码 {process.env.REACT_APP_TITLE}</b>
+                  <b>{process.env.REACT_APP_TITLE}</b>
                 </p>
                 <RecaptchaV2Popup
                   callback={() => {
@@ -449,7 +449,7 @@ class LoginAltPopupSelf extends Component {
                 onClick={this.next_step.bind(this)}
                 disabled={this.state.loading_status === 'loading'}
               >
-                Continue
+                Confirm
               </button>
             </p>
           </div>

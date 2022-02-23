@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "https://cdn.jsdelivr.net/gh/JimChen2002/webhole@gh-pages-master/static/css/main.ae083ad1.chunk.css",
-    "main.js": "https://cdn.jsdelivr.net/gh/JimChen2002/webhole@gh-pages-master/static/js/main.553eab10.chunk.js",
-    "main.js.map": "https://cdn.jsdelivr.net/gh/JimChen2002/webhole@gh-pages-master/static/js/main.553eab10.chunk.js.map",
+    "main.js": "https://cdn.jsdelivr.net/gh/JimChen2002/webhole@gh-pages-master/static/js/main.8301eaf1.chunk.js",
+    "main.js.map": "https://cdn.jsdelivr.net/gh/JimChen2002/webhole@gh-pages-master/static/js/main.8301eaf1.chunk.js.map",
     "runtime-main.js": "https://cdn.jsdelivr.net/gh/JimChen2002/webhole@gh-pages-master/static/js/runtime-main.ce528bb3.js",
     "runtime-main.js.map": "https://cdn.jsdelivr.net/gh/JimChen2002/webhole@gh-pages-master/static/js/runtime-main.ce528bb3.js.map",
     "static/css/2.55afb652.chunk.css": "https://cdn.jsdelivr.net/gh/JimChen2002/webhole@gh-pages-master/static/css/2.55afb652.chunk.css",
     "static/js/2.2387dd70.chunk.js": "https://cdn.jsdelivr.net/gh/JimChen2002/webhole@gh-pages-master/static/js/2.2387dd70.chunk.js",
     "static/js/2.2387dd70.chunk.js.map": "https://cdn.jsdelivr.net/gh/JimChen2002/webhole@gh-pages-master/static/js/2.2387dd70.chunk.js.map",
     "index.html": "./index.html",
-    "precache-manifest.b76d54b9cef938c054b304725bc88a35.js": "https://cdn.jsdelivr.net/gh/JimChen2002/webhole@gh-pages-master/precache-manifest.b76d54b9cef938c054b304725bc88a35.js",
+    "precache-manifest.4aebd0c2e5374b5125f2acf5e0c59b96.js": "https://cdn.jsdelivr.net/gh/JimChen2002/webhole@gh-pages-master/precache-manifest.4aebd0c2e5374b5125f2acf5e0c59b96.js",
     "service-worker.js": "./service-worker.js",
     "static/css/2.55afb652.chunk.css.map": "https://cdn.jsdelivr.net/gh/JimChen2002/webhole@gh-pages-master/static/css/2.55afb652.chunk.css.map",
     "static/css/main.ae083ad1.chunk.css.map": "https://cdn.jsdelivr.net/gh/JimChen2002/webhole@gh-pages-master/static/css/main.ae083ad1.chunk.css.map",
@@ -21,6 +21,6 @@
     "static/css/2.55afb652.chunk.css",
     "static/js/2.2387dd70.chunk.js",
     "static/css/main.ae083ad1.chunk.css",
-    "static/js/main.553eab10.chunk.js"
+    "static/js/main.8301eaf1.chunk.js"
   ]
 }

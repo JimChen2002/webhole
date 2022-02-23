@@ -94,69 +94,17 @@ export function InfoSidebar(props) {
           )}
         </UnregisterPopup>
       </div>
-      <div className="box help-desc-box">
-        <p>
-          <a onClick={DoUpdate}>强制检查更新</a>
-          （当前版本：【{process.env.REACT_APP_BUILD_INFO || '---'}{' '}
-          {process.env.NODE_ENV}】 会自动在后台检查更新并在下次访问时更新）
-        </p>
-      </div>
+      {/*
+        <div className="box help-desc-box">
+          <p>
+            <a onClick={DoUpdate}>强制检查更新</a>
+            （当前版本：【{process.env.REACT_APP_BUILD_INFO || '---'}{' '}
+            {process.env.NODE_ENV}】 会自动在后台检查更新并在下次访问时更新）
+          </p>
+        </div>
+      */}
       <div className="box help-desc-box">
         <p>联系我们：{process.env.REACT_APP_CONTACT_EMAIL}</p>
-      </div>
-      <div className="box help-desc-box">
-        <p>
-          {process.env.REACT_APP_TITLE} 网页版 by @
-          {process.env.REACT_APP_GITHUB_USER}， 基于&nbsp;
-          <a
-            href="https://www.gnu.org/licenses/gpl-3.0.zh-cn.html"
-            target="_blank"
-          >
-            GPLv3
-          </a>
-          &nbsp;协议在{' '}
-          <a href={process.env.REACT_APP_GITHUB_WEB_URL} target="_blank">
-            GitHub
-          </a>{' '}
-          开源
-        </p>
-        <p>
-          {process.env.REACT_APP_TITLE} 网页版的诞生离不开&nbsp;
-          <a
-            href="https://github.com/pkuhelper-web/webhole"
-            target="_blank"
-            rel="noopener"
-          >
-            P大树洞网页版 by @xmcp
-          </a>
-          、
-          <a href="https://reactjs.org/" target="_blank" rel="noopener">
-            React
-          </a>
-          、
-          <a href="https://icomoon.io/#icons" target="_blank" rel="noopener">
-            IcoMoon
-          </a>
-          &nbsp;等开源项目
-        </p>
-        <p>
-          This program is free software: you can redistribute it and/or modify
-          it under the terms of the GNU General Public License as published by
-          the Free Software Foundation, either version 3 of the License, or (at
-          your option) any later version.
-        </p>
-        <p>
-          This program is distributed in the hope that it will be useful, but
-          WITHOUT ANY WARRANTY; without even the implied warranty of
-          MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the&nbsp;
-          <a
-            href="https://www.gnu.org/licenses/gpl-3.0.zh-cn.html"
-            target="_blank"
-          >
-            GNU General Public License
-          </a>
-          &nbsp;for more details.
-        </p>
       </div>
     </div>
   );
@@ -246,7 +194,7 @@ export class LoginForm extends Component {
                       <p>
                         <small>
                           {process.env.REACT_APP_TITLE}
-                          面向T大学生，通过T大邮箱验证您的身份并提供服务。
+                          面向CMU学生，通过CMU邮箱验证您的身份并提供服务。
                         </small>
                       </p>
                     </div>

@@ -341,7 +341,7 @@ class LoginAltPopupSelf extends Component {
                   2. You can get the code with a device, and then sign up with 
                   another device. We are compatible for both phone and computer.
                 </p>
-                <p>*Press continue if you have one*</p>
+                <p>*Press skip if you have the code*</p>
               </>
             )}  
             <p style={this.state.phase === 1 ? {} : { display: 'none' }}>
@@ -359,6 +359,17 @@ class LoginAltPopupSelf extends Component {
                   }}
                 />
               </label>
+            </p>
+            <p style={this.state.phase === 1 ? {} : { display: 'none' }}>
+              <button
+                onClick={()=>{
+                  this.setState({
+                    phase: 2,
+                  })
+                }}
+              >
+                <b>Skip</b>
+              </button>
             </p>
             {(this.state.phase === 2) && (
               <>

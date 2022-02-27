@@ -114,7 +114,7 @@ class ControlBar extends PureComponent {
               onClick={this.do_refresh_bound}
             >
               <span className="icon icon-refresh" />
-              <span className="control-btn-label">最新</span>
+              <span className="control-btn-label">Latest</span>
             </a>
             {!!token && (
               <a
@@ -122,7 +122,7 @@ class ControlBar extends PureComponent {
                 onClick={this.do_attention_bound}
               >
                 <span className="icon icon-attention" />
-                <span className="control-btn-label">关注</span>
+                <span className="control-btn-label">Subscriptions</span>
               </a>
             )}
             <a
@@ -130,14 +130,14 @@ class ControlBar extends PureComponent {
               onClick={this.do_hot_posts_bound}
             >
               <span className="icon icon-fire" />
-              <span className="control-btn-label">热榜</span>
+              <span className="control-btn-label">Trend</span>
             </a>
             <input
               className="control-search"
               value={this.state.search_text}
               placeholder={`${
-                this.props.mode === 'attention' ? '在关注列表中' : ''
-              }搜索 或 #树洞号`}
+                this.props.mode === 'attention' ? 'In Subscriptions' : ''
+              }Search or #post_id`}
               onChange={this.on_change_bound}
               onKeyPress={this.on_keypress_bound}
             />
@@ -152,7 +152,7 @@ class ControlBar extends PureComponent {
             >
               <span className={'icon icon-' + (token ? 'about' : 'login')} />
               <span className="control-btn-label">
-                {token ? '账户' : '登录'}
+                {token ? '账户' : 'Login'}
               </span>
             </a>
             {!!token && (

@@ -58,38 +58,30 @@ export function InfoSidebar(props) {
       <div className="box list-menu">
         <a href={process.env.REACT_APP_RULES_URL} target="_blank">
           <span className="icon icon-textfile" />
-          <label>树洞规范</label>
+          <label>Hole Rules</label>
         </a>
         &nbsp;&nbsp;
         <a href={process.env.REACT_APP_TOS_URL} target="_blank">
           <span className="icon icon-textfile" />
-          <label>服务协议</label>
+          <label>Service Terms</label>
         </a>
         &nbsp;&nbsp;
         <a href={process.env.REACT_APP_PRIVACY_URL} target="_blank">
           <span className="icon icon-textfile" />
-          <label>隐私政策</label>
+          <label>Privacy Terms</label>
         </a>
         <br />
-        <a
-          onClick={() => {
-            props.show_sidebar('设置', <ConfigUI />);
-          }}
-        >
-          <span className="icon icon-settings" />
-          <label>设置</label>
-        </a>
         &nbsp;&nbsp;
         <a href={process.env.REACT_APP_GITHUB_ISSUES_URL} target="_blank">
           <span className="icon icon-github" />
-          <label>意见反馈</label>
+          <label>Feedback</label>
         </a>
         <br />
         <UnregisterPopup>
           {(do_popup) => (
             <a onClick={do_popup}>
               <span className="icon icon-refresh" />
-              <label>注销账户/找回密码</label>
+              <label>Delete Account</label>
             </a>
           )}
         </UnregisterPopup>
@@ -104,7 +96,7 @@ export function InfoSidebar(props) {
         </div>
       */}
       <div className="box help-desc-box">
-        <p>联系我们：{process.env.REACT_APP_CONTACT_EMAIL}</p>
+        <p>Contact us: {process.env.REACT_APP_CONTACT_EMAIL}</p>
       </div>
     </div>
   );
@@ -188,13 +180,13 @@ export class LoginForm extends Component {
                       <p>
                         <button type="button" onClick={do_popup}>
                           <span className="icon icon-login" />
-                          &nbsp;登录
+                          &nbsp;Log in
                         </button>
                       </p>
                       <p>
                         <small>
-                          {process.env.REACT_APP_TITLE}
-                          面向CMU学生，通过CMU邮箱验证您的身份并提供服务。
+                          {process.env.REACT_APP_TITLE} provide service for CMU students only,
+                          please verify your identity with CMU email
                         </small>
                       </p>
                     </div>

@@ -228,7 +228,7 @@ class App extends Component {
                     </SwitchTransition>
                 )
               ) : (
-                <TitleLine text="请登录后查看内容" />
+                <TitleLine text="Please log in to see the content" />
               )}
               <br />
             </div>
